@@ -1,0 +1,235 @@
+{
+  "user": {
+    "list": [
+      {
+        "name": "Juan",
+        "age": 24,
+        "salary": "202345678942123457"
+      }
+    ],
+    "pages": 1
+  },
+  "hero": {
+    "squadName": "Super hero squad",
+    "homeTown": "Metro City",
+    "formed": 2016,
+    "secretBase": "Super tower",
+    "active": true,
+    "members": [
+      {
+        "name": "Molecule Man",
+        "age": 29,
+        "secretIdentity": "Dan Jukes",
+        "powers": [
+          "Radiation resistance",
+          "Turning tiny",
+          "Radiation blast"
+        ]
+      },
+      {
+        "name": "Madame Uppercut",
+        "age": 39,
+        "secretIdentity": "Jane Wilson",
+        "powers": [
+          "Million tonne punch",
+          "Damage resistance",
+          "Superhuman reflexes"
+        ]
+      },
+      {
+        "name": "Eternal Flame",
+        "age": 1000000,
+        "secretIdentity": "Unknown",
+        "powers": [
+          "Immortality",
+          "Heat Immunity",
+          "Inferno",
+          "Teleportation",
+          "Interdimensional travel"
+        ]
+      }
+    ]
+  },
+  "cards": {
+    "suzuki": [
+      {
+        "name": "alto 800",
+        "wheels": "13"
+      }
+    ],
+    "chevrolet": [
+      {
+        "name": "montana",
+        "wheels": "15"
+      }
+    ]
+  },
+  "saga-transformers": {
+    "status": 200,
+    "pages": 1,
+    "menu": {
+      "Sagas": [
+        {
+          "level": 1,
+          "route": "/cibertron",
+          "name": "Transformers Cybertron"
+        },
+        {
+          "level": 1,
+          "route": "/armada",
+          "name": "Transformers Armada"
+        }
+      ],
+      "RobotsPrincipales": {
+        "level": 0,
+        "route": "/robots-principales"
+      }
+    },
+    "list": [
+      {
+        "name": "Optimus Prime",
+        "range": {
+          "id": "L",
+          "name": "Lider"
+        },
+        "team": {
+          "id": 0,
+          "name": "Autobots"
+        }
+      },
+      {
+        "name": "Arcee",
+        "range": {
+          "id": "G",
+          "name": "Guerrero"
+        },
+        "team": {
+          "id": 0,
+          "name": "Autobots"
+        }
+      },
+      {
+        "name": "Bumblebee",
+        "range": {
+          "id": "E",
+          "name": "Explorador"
+        },
+        "team": {
+          "id": 0,
+          "name": "Autobots"
+        }
+      },
+      {
+        "name": "Ratchet",
+        "range": {
+          "id": "M",
+          "name": "Médico"
+        },
+        "team": {
+          "id": 0,
+          "name": "Autobots"
+        }
+      },
+      {
+        "name": "Bulkhead",
+        "range": {
+          "id": "C",
+          "name": "Constructor"
+        },
+        "team": {
+          "id": 0,
+          "name": "Autobots"
+        }
+      },
+      {
+        "name": "Megatron",
+        "range": {
+          "id": "L",
+          "name": "Lider"
+        },
+        "team": {
+          "id": 1,
+          "name": "Decepticons"
+        }
+      },
+      {
+        "name": "Starscream",
+        "range": {
+          "id": "CO",
+          "name": "Comandante"
+        },
+        "team": {
+          "id": 1,
+          "name": "Decepticons"
+        }
+      },
+      {
+        "name": "Darksteel",
+        "range": {
+          "id": "H",
+          "name": "Hunters"
+        },
+        "team": {
+          "id": 2,
+          "name": "Predacons"
+        }
+      },
+      {
+        "name": "Airachnid",
+        "range": {
+          "id": "L",
+          "name": "Lider"
+        },
+        "team": {
+          "id": 3,
+          "name": "Insecticons"
+        }
+      },
+      {
+        "name": "Insecto 1",
+        "range": {
+          "id": "G",
+          "name": "Guerrero"
+        },
+        "team": {
+          "id": 3,
+          "name": "Insecticons"
+        }
+      },
+      {
+        "name": "Soldado 1",
+        "range": {
+          "id": "T",
+          "name": "Terrorcons"
+        },
+        "team": {
+          "id": 1,
+          "name": "Decepticons"
+        }
+      }
+    ]
+  },
+  "saga-transforers-cybertron": {
+    "list": {
+      "name": "Optimus Prime",
+      "range": {
+        "id": "L",
+        "name": "Lider"
+      },
+      "team": {
+        "id": 0,
+        "name": "Autobots"
+      },
+      "tieneYaveCybertron": "S"
+    }
+  },
+  "equipos-futbol-colombiano": {},
+  "menu-user": [
+    {"route": "uri_1", "userVies": "all"},
+    {"route": "uri_1", "userVies": "user1"},
+    {"route": "uri_1", "userVies": "user23"},
+    {"route": [{"route": "uri_1"}], "userVies": "all"},
+    {"route": [{"route": "uri_1", "userVies": "all"}], "userVies": "all"},
+    {"route": [{"route": "uri_1", "userVies": "userN"}], "userVies": "all"}
+  ]
+}
