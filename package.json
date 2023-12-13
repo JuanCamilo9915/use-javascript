@@ -1,0 +1,17 @@
+{
+  "name": "appfrontjs",
+  "version": "1.0.0",
+  "description": "Project front",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-back": "node src/index.js",
+    "start-mock": "json-server --watch --port 3100 ./src/assets/db/db.json"
+  },
+  "author": "JuanKDev",
+  "license": "ISC",
+  "dependencies": {
+    "json-server": "^0.17.4"
+  }
+}
