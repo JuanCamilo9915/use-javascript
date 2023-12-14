@@ -6,8 +6,8 @@ export class Menu {
     constructor() {}
 
     getAllMenu() {
-        listXMLRequestHttp(apis.menuMap)
-        .then(menu => console.log('Menu: ', menu))
+        listXMLRequestHttp(apis.menu)
+        .then(({ menu }) => console.log('Menu: ', menu))
         .catch(err => console.error(err));
     }
 

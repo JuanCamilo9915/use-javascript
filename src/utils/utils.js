@@ -7,13 +7,9 @@ const fakeUrls = Object.freeze({
 });
 
 export const apis = Object.freeze({
-  menuMap: {
-    method: req.GET,
-    url: urls.menuMap
-  },
   menu: {
     method: req.GET,
-    url: urls.menu
+    url: fakeUrls.user
   },
   carFake: {
     method: req.GET,
@@ -21,6 +17,6 @@ export const apis = Object.freeze({
   },
   car: {
     method: req.GET,
-    url: urls.cars
+    url: fakeUrls.cars
   }
 });

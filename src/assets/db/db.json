@@ -1,10 +1,62 @@
 {
   "user": {
+    "menu": [
+      {
+        "id": 1,
+        "name": "Home",
+        "type": 0
+      },
+      {
+        "id": 2,
+        "name": "PLay",
+        "type": 0
+      },
+      {
+        "id": 3,
+        "name": "Security",
+        "type": 0
+      },
+      {
+        "id": 4,
+        "name": "Group_1",
+        "type": 1,
+        "parentItemId": 3
+      },
+      {
+        "id": 5,
+        "name": "Page_1",
+        "type": 2,
+        "parentItemId": 1,
+        "resource": "route/page"
+      },
+      {
+        "id": 6,
+        "name": "Page_2",
+        "type": 2,
+        "parentItemId": 3,
+        "resource": "route/page_2"
+      },
+      {
+        "id": 7,
+        "name": "Page_3",
+        "type": 2,
+        "parentItemId": 4,
+        "resource": "route/page_3"
+      },
+      {
+        "id": 8,
+        "name": "Page_4",
+        "type": 2,
+        "parentItemId": 4,
+        "resource": "route/page_4"
+      }
+    ],
     "list": [
       {
         "name": "Juan",
         "age": 24,
-        "salary": "202345678942123457"
+        "cargo": "Desarrollador FullStack",
+        "salary": "20780000"
       }
     ],
     "pages": 1
