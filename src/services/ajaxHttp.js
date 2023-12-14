@@ -7,7 +7,7 @@ const handledError = (err) => {
  * 
  * @param { ParamsFetch } apiTransforms
  * @property ParamsFetch { method, url }
- * @returns 
+ * @returns fetch
  */
 export const listFetchHttp = (apiTransforms) => {
     return fetch(apiTransforms)
