@@ -3,49 +3,49 @@
     "menu": [
       {
         "id": 1,
-        "name": "Home",
+        "label": "Home",
         "type": 0
       },
       {
         "id": 2,
-        "name": "PLay",
+        "label": "PLay",
         "type": 0
       },
       {
         "id": 3,
-        "name": "Security",
+        "label": "Security",
         "type": 0
       },
       {
         "id": 4,
-        "name": "Group_1",
+        "label": "Group_1",
         "type": 1,
         "parentItemId": 3
       },
       {
         "id": 5,
-        "name": "Page_1",
+        "label": "Page_1",
         "type": 2,
         "parentItemId": 1,
         "resource": "route/page"
       },
       {
         "id": 6,
-        "name": "Page_2",
+        "label": "Page_2",
         "type": 2,
         "parentItemId": 3,
         "resource": "route/page_2"
       },
       {
         "id": 7,
-        "name": "Page_3",
+        "label": "Page_3",
         "type": 2,
         "parentItemId": 4,
         "resource": "route/page_3"
       },
       {
         "id": 8,
-        "name": "Page_4",
+        "label": "Page_4",
         "type": 2,
         "parentItemId": 4,
         "resource": "route/page_4"
@@ -53,13 +53,21 @@
     ],
     "list": [
       {
+        "id": 1,
         "name": "Juan",
         "age": 24,
-        "cargo": "Desarrollador FullStack",
-        "salary": "20780000"
+        "position": "FullStack Developer",
+        "salary": "20780000",
+        "viewMenu": 0
+      },
+      {
+        "id": 2,
+        "name": "Fabián",
+        "age": 34,
+        "position": "Adviser",
+        "salary": "4800000"
       }
-    ],
-    "pages": 1
+    ]
   },
   "hero": {},
   "cards": {

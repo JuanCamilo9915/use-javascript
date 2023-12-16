@@ -1,0 +1,1 @@
+export const menuForUser2 = ["Home", "Page_1"];
