@@ -4,9 +4,9 @@ class Main {
     static main() {
         const menu = new Menu();
 
-        menu.getAllMenu();
+        /*menu.getAllMenu();
         menu.getAllMenuFetch();
-        menu.getAllMenuFetchAsyncAwait();
+        menu.getAllMenuFetchAsyncAwait();*/
 
         menu.getMenuUser();
     }
