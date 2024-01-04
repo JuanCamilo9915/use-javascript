@@ -4,49 +4,49 @@
       {
         "id": 1,
         "label": "Home",
-        "type": 0
+        "level": 0
       },
       {
         "id": 2,
         "label": "PLay",
-        "type": 0
+        "level": 0
       },
       {
         "id": 3,
         "label": "Security",
-        "type": 0
+        "level": 0
       },
       {
         "id": 4,
         "label": "Group_1",
-        "type": 1,
+        "level": 1,
         "parentItemId": 3
       },
       {
         "id": 5,
         "label": "Page_1",
-        "type": 2,
+        "level": 2,
         "parentItemId": 1,
         "resource": "route/page"
       },
       {
         "id": 6,
         "label": "Page_2",
-        "type": 2,
+        "level": 2,
         "parentItemId": 3,
         "resource": "route/page_2"
       },
       {
         "id": 7,
         "label": "Page_3",
-        "type": 2,
+        "level": 2,
         "parentItemId": 4,
         "resource": "route/page_3"
       },
       {
         "id": 8,
         "label": "Page_4",
-        "type": 2,
+        "level": 2,
         "parentItemId": 4,
         "resource": "route/page_4"
       }

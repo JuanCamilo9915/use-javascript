@@ -10,7 +10,7 @@ export function mapStructureMenu(res) {
             0: (id) => grandFather[id] = menu,
             1: (id) => parent[id] = menu,
             2: (id) => page[id] = menu
-        })[menu.type](menu.id);
+        })[menu.level](menu.id);
     });
 
     // findChildrenForParent(menu);
@@ -23,7 +23,6 @@ function mapMenuOfUser(menu) {
     let isGrandFather = undefined;
     let existsProperty = undefined;
     let itemMenu = undefined;
-    // const listAddParents
     const menuOk = [];
 
     // const addChildToParent = (isMenuRoot, pageChild) => {

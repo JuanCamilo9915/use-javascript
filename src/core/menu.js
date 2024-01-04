@@ -20,12 +20,9 @@ export class Menu {
     }
 
     async getAllMenuFetchAsyncAwait() {
-        try {
-            const { menu } = await listFetchHttp(apis.menu);
-            console.log('Menu Fetch Async Await: ', menu);
-        } catch (err) {
-            console.log('Err Async Await: ', err);
-        }
+        const { menu } = await listFetchHttp(apis.menu)
+        .catch(err => console.log('Err Async Await: ', err));
+        console.log('Menu Fetch Async Await: ', menu);
     }
 
     async getMenuUser() {
