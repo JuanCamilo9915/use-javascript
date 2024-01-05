@@ -27,9 +27,11 @@ La rama `project-dom` contiene ejemplos que se enfocan en el manejo del DOM con 
 Para poner en ejecución el proyecto de la presente rama se requieren los siguientes items:
 * La extención de `Live server` para el editor de código vscode.
 * NodeJS instalado porque se utiliza la librería de `Json-Server`.
+  * Ejecutar el comando: `npm run start-mock` para levantar el servidor de json-server.
 
 ### Project-DOM
 
 Para poner en ejecución el proyecto de la presente rama se requieren los siguientes items:
 * La extención de `Live server` para el editor de código vscode.
 * NodeJS instalado porque se utiliza la librería de Json-Server.
+  * Ejecutar el comando: `npm run start-mock` para levantar el servidor de json-server.
