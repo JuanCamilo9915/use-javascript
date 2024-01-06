@@ -9,20 +9,22 @@ export class Menu {
 
     getAllMenu() {
         listXMLRequestHttp(apis.menu)
-        .then(({ menu }) => console.log('Menu XMLRrequestHttp: ', menu))
-        .catch(err => console.error(err));
+        .then(({ menu }) => console.log('Menu XMLRrequestHttp: ', menu, '\n\n\n'))
+        .catch(err => console.log(err));
     }
 
     getAllMenuFetch() {
         listFetchHttp(apis.menu)
-        .then(({ menu }) => console.log('Menu Fetch: ', menu))
-        .catch(err => console.error(err));
+        .then(({ menu }) => console.log('Menu Fetch: ', menu, '\n\n\n'))
+        .catch(({msg}) => console.log(msg));
     }
 
     async getAllMenuFetchAsyncAwait() {
-        const { menu } = await listFetchHttp(apis.menu)
-        .catch(err => console.log('Err Async Await: ', err));
-        console.log('Menu Fetch Async Await: ', menu);
+        const handledError = ({msg}) => console.log('Err Async Await: ', msg);
+        const list = await listFetchHttp(apis.menu).catch(handledError);
+
+        if (!list) return;
+        console.log('Menu Fetch Async Await: ', list.menu, '\n\n\n');
     }
 
     async getMenuUser() {
@@ -30,7 +32,7 @@ export class Menu {
             const response = await listFetchHttp(apis.menu);
             mapStructureMenu(response);
         } catch (err) {
-            console.log('Err Async Await: ', err);
+            console.log('Err Async Await: ', err.msg);
         }
     }
 

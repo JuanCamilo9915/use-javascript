@@ -1,13 +1,9 @@
-const handledError = (err) => {
-    alert('err: ' + err);
-    return undefined;
-}
-
 /**
  * 
- * @param { ParamsFetch } apiTransforms
+ * @param { ParamsFetch } api
  * @property ParamsFetch { method, url }
  * @returns fetch
+ * @returns throw { msg }
  */
 export const listFetchHttp = (api) => {
     const { method, url } = api;
@@ -15,5 +11,5 @@ export const listFetchHttp = (api) => {
 
     return fetch(reqApi)
         .then(res => res.json())
-        .catch(handledError);
+        .catch(err => { throw { msg: err.message } });
 };
