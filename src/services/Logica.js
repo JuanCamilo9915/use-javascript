@@ -32,6 +32,10 @@ export function mapStructureMenu(res) {
  */
 function mapMenuOfUser(menu) {
     const { grandFather, parent, page, listUsers } = menu;
+    console.log('grand: ', Object.assign({}, grandFather));
+    console.log('parent: ', Object.assign({}, parent));
+    console.log('page: ', Object.assign({}, page));
+    let idMenuToSearchBefore = undefined;
     let idMenuToSearch = undefined;
     let isGrandFather = undefined;
     let existsProperty = undefined;
@@ -41,6 +45,7 @@ function mapMenuOfUser(menu) {
     // let resourcesChildren = [];
 
     const addChildToParent = (isMenuRoot, pageChild) => {
+        // debugger;
         itemMenu = isMenuRoot ? grandFather : parent;
 
         existsProperty = itemMenu[idMenuToSearch].hasOwnProperty('children');
@@ -56,14 +61,16 @@ function mapMenuOfUser(menu) {
             Object.values(page)
             .filter(item => item.parentItemId === idMenuToSearch)
             .forEach(item => {
+                // debugger;
                 itemMenu[idMenuToSearch].children.push(item)
                 delete page[item.id];
             });
         }
-
+        
+        idMenuToSearchBefore = idMenuToSearch;
         idMenuToSearch = itemMenu[idMenuToSearch].parentItemId;
         isGrandFather = grandFather[idMenuToSearch] !== undefined;
-        addChildToParent(isGrandFather, ...Object.values(itemMenu));
+        addChildToParent(isGrandFather, itemMenu[idMenuToSearchBefore]);
     }
 
     const mapOutMenu = () => {
