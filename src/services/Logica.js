@@ -32,7 +32,7 @@ export function mapStructureMenu(res) {
  */
 function mapMenuOfUser(menu) {
     const { grandFather, parent, page, listUsers } = menu;
-    console.log('grand: ', Object.assign({}, grandFather));
+    console.log('grand: ', Object.assign({}, {...grandFather}));
     console.log('parent: ', Object.assign({}, parent));
     console.log('page: ', Object.assign({}, page));
     let idMenuToSearchBefore = undefined;
@@ -54,6 +54,8 @@ function mapMenuOfUser(menu) {
 
         if (itemMenu[idMenuToSearch].level === 0) {
             itemMenu[idMenuToSearch].children.push(pageChild);
+
+            (pageChild.level === 2) ? delete page[pageChild.id] : null;
             return;
         }
 
@@ -73,7 +75,7 @@ function mapMenuOfUser(menu) {
         addChildToParent(isGrandFather, itemMenu[idMenuToSearchBefore]);
     }
 
-    const mapOutMenu = () => {
+    const mapOutMenu = () => {        
         for (const keyPage in page) {
             idMenuToSearch = page[keyPage].parentItemId;
 
@@ -86,6 +88,21 @@ function mapMenuOfUser(menu) {
                 addChildToParent(isGrandFather, page[keyPage]);
             }
         }
+
+        for (const keyParent in parent) {
+            idMenuToSearch = parent[keyParent].parentItemId;
+
+            if (grandFather[idMenuToSearch]) {
+                isGrandFather = true;
+                addChildToParent(isGrandFather, parent[keyParent]);
+            }
+            else {
+                isGrandFather = false;
+                addChildToParent(isGrandFather, parent[keyParent]);
+            }
+        }
+
+
     }
 
     listUsers.forEach(user => {
