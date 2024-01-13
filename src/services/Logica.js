@@ -26,45 +26,79 @@ export function mapStructureMenu(res) {
 function mapMenuOfUser(menu) {
     const { grandFather, parent, page, listUsers } = menu;
 
-    const searchParentOnParent = (selectParent) => {
-        const limitLoops = selectParent.length;
+    const parentArr = Object.values(parent);
+    const pageArr = Object.values(page);
+    let resources = [];
+    let childrenParent = [];
+    let limitLoops = 0;
 
-        for (let i = 0; i < limitLoops; i++) {// cambiarlo por un forEach a ver que tal :).
-            const resources = Object.values(page)
-                .filter(item => item.parentItemId === selectParent[i].id);
+    const filterParentOrPage = (collection, idMenuSearch) => {
+        return collection
+        .filter(item => item.parentItemId === idMenuSearch);
+    }
 
+    const searchParentOnParentUsingForEach = (selectParent) => {
+        selectParent.forEach(menu => {
+            resources = filterParentOrPage(pageArr, menu.id);
+            parent[menu.id].children = resources;
+            childrenParent = filterParentOrPage(parentArr, menu.id);
+
+            if (childrenParent.length > 0) {
+                childrenParent.forEach(item => {
+                    parent[menu.id].children.push(item);
+                });
+                // TODO: el carácter opcional(?) es obligatorio, si se quita deja de funcionar.
+                grandFather[menu.parentItemId]?.children.push(parent[menu.id]);            
+                searchParentOnParentUsingForEach(childrenParent);
+                
+            } else {
+                selectParent.forEach(item => {
+                    // TODO: el carácter opcional(?) es obligatorio, si se quita deja de funcionar.
+                    grandFather[item.parentItemId]?.children.push(item);
+                })
+            }
+        })
+    }
+
+    /* TODO: este bloque de código se deja a modo de ejemplo, ya que funciona exactamente igual a
+     searchParentOnParentUsingForEach(), como una manera alterna de abordar el ejercicio. */
+    const searchParentOnParentUsingFor = (selectParent) => {
+        limitLoops = selectParent.length;
+        
+        for (let i = 0; i < limitLoops; i++) {
+            resources = filterParentOrPage(pageArr, selectParent[i].id);
             parent[selectParent[i].id].children = resources;
-
-            const childrenParent = Object.values(parent)
-                .filter(item => item.parentItemId === selectParent[i].id);
+            childrenParent = filterParentOrPage(parentArr, selectParent[i].id);
 
             if (childrenParent.length > 0) {
                 childrenParent.forEach(item => {
                     parent[selectParent[i].id].children.push(item);
                 });
-                grandFather[selectParent[i].parentItemId].children.push(parent[selectParent[i].id]);
+                // TODO: el carácter opcional(?) es obligatorio, si se quita deja de funcionar.
+                grandFather[selectParent[i].parentItemId]?.children.push(parent[selectParent[i].id]);
             
-                searchParentOnParent(childrenParent);
-            } else {
-                selectParent.forEach(item => {
-                    grandFather[item.parentItemId]?.children.push(item);
-                })
+                searchParentOnParentUsingFor(childrenParent);
+                continue;/* TODO: con esto nos ahorramos el uso del bloque else. */
             }
+            
+            selectParent.forEach(item => {
+                // TODO: el carácter opcional(?) es obligatorio, si se quita deja de funcionar.
+                grandFather[item.parentItemId]?.children.push(item);
+            })
         }
     }
 
     const mapOutMenu = () => {
         for (const idMenu in grandFather) {
-            const resources = Object.values(page)
-                .filter(item => item.parentItemId === +idMenu);
-
+           resources = filterParentOrPage(pageArr, +idMenu);
             grandFather[idMenu].children = resources;
-
-            const childrenParent = Object.values(parent)
-                .filter(item => item.parentItemId === +idMenu);
+            childrenParent = filterParentOrPage(parentArr, +idMenu);
 
             if (childrenParent.length === 0) continue;
-            searchParentOnParent(childrenParent);
+            /* TODO: Using for loop imperative
+             searchParentOnParentUsingFor(childrenParent); */
+            // TODO: Using forEach loop declarative
+            searchParentOnParentUsingForEach(childrenParent);
         }
     }
 
