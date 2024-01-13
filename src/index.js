@@ -3,6 +3,8 @@ import { listTransformersHttp } from './services/ajaxHttp.js';
 // const doc = document;
 // const formatJson = doc.createElement("pre");
 
+window.matchMedia('(min-width: 720px)').addEventListener('change', () => alert('Heloww i am 720px of width'))
+
 listTransformersHttp()
   .then(res => showData(res))
   .catch(err => showData(err));
