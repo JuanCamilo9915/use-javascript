@@ -1,10 +1,3 @@
-/* Nota:
-este código será refactorizado, esto debido a la manipulación de algunos objetos y areglos
-los cuales seguir el flujo de esa lógica es un poco complejo y confuso apesar de que
-funciona perfectamente.
-
-Cabe mencionar que esta lógica se dejara comentada com recordatorio y aprendizaje.
-*/
 /**
  * @param { list, menu } res 
  */
@@ -32,168 +25,52 @@ export function mapStructureMenu(res) {
  */
 function mapMenuOfUser(menu) {
     const { grandFather, parent, page, listUsers } = menu;
-    console.log('grand: ', Object.assign({}, {...grandFather}));
-    console.log('parent: ', Object.assign({}, parent));
-    console.log('page: ', Object.assign({}, page));
-    let idMenuToSearchBefore = undefined;
-    let idMenuToSearch = undefined;
-    let isGrandFather = undefined;
-    let existsProperty = undefined;
-    let itemMenu = undefined;
-    let menuOk = [];
-    // let itemsChildren = [];
-    // let resourcesChildren = [];
 
-    const addChildToParent = (isMenuRoot, pageChild) => {
-        // debugger;
-        itemMenu = isMenuRoot ? grandFather : parent;
+    const searchParentOnParent = (selectParent) => {
+        const limitLoops = selectParent.length;
 
-        existsProperty = itemMenu[idMenuToSearch].hasOwnProperty('children');
+        for (let i = 0; i < limitLoops; i++) {// cambiarlo por un forEach a ver que tal :).
+            const resources = Object.values(page)
+                .filter(item => item.parentItemId === selectParent[i].id);
 
-        if (!existsProperty) itemMenu[idMenuToSearch].children = [];
+            parent[selectParent[i].id].children = resources;
 
-        if (itemMenu[idMenuToSearch].level === 0) {
-            itemMenu[idMenuToSearch].children.push(pageChild);
+            const childrenParent = Object.values(parent)
+                .filter(item => item.parentItemId === selectParent[i].id);
 
-            (pageChild.level === 2) ? delete page[pageChild.id] : null;
-            return;
+            if (childrenParent.length > 0) {
+                childrenParent.forEach(item => {
+                    parent[selectParent[i].id].children.push(item);
+                });
+                grandFather[selectParent[i].parentItemId].children.push(parent[selectParent[i].id]);
+            
+                searchParentOnParent(childrenParent);
+            } else {
+                selectParent.forEach(item => {
+                    grandFather[item.parentItemId]?.children.push(item);
+                })
+            }
         }
-
-        if (!isMenuRoot) {
-            Object.values(page)
-            .filter(item => item.parentItemId === idMenuToSearch)
-            .forEach(item => {
-                // debugger;
-                itemMenu[idMenuToSearch].children.push(item)
-                delete page[item.id];
-            });
-        }
-        
-        idMenuToSearchBefore = idMenuToSearch;
-        idMenuToSearch = itemMenu[idMenuToSearch].parentItemId;
-        isGrandFather = grandFather[idMenuToSearch] !== undefined;
-        addChildToParent(isGrandFather, itemMenu[idMenuToSearchBefore]);
     }
 
-    const mapOutMenu = () => {        
-        for (const keyPage in page) {
-            idMenuToSearch = page[keyPage].parentItemId;
+    const mapOutMenu = () => {
+        for (const idMenu in grandFather) {
+            const resources = Object.values(page)
+                .filter(item => item.parentItemId === +idMenu);
 
-            if (grandFather[idMenuToSearch]) {
-                isGrandFather = true;
-                addChildToParent(isGrandFather, page[keyPage]);
-            }
-            else {
-                isGrandFather = false;
-                addChildToParent(isGrandFather, page[keyPage]);
-            }
+            grandFather[idMenu].children = resources;
+
+            const childrenParent = Object.values(parent)
+                .filter(item => item.parentItemId === +idMenu);
+
+            if (childrenParent.length === 0) continue;
+            searchParentOnParent(childrenParent);
         }
-
-        for (const keyParent in parent) {
-            idMenuToSearch = parent[keyParent].parentItemId;
-
-            if (grandFather[idMenuToSearch]) {
-                isGrandFather = true;
-                addChildToParent(isGrandFather, parent[keyParent]);
-            }
-            else {
-                isGrandFather = false;
-                addChildToParent(isGrandFather, parent[keyParent]);
-            }
-        }
-
-
     }
 
     listUsers.forEach(user => {
         console.log(`\n\n-------------User: ${user.name}-------------`);
         mapOutMenu();
-        menuOk = Object.values(grandFather);
-        console.log('Menu user # 1: ', JSON.stringify(grandFather, null, 2));
-        console.log('\n\n\nMenu user # 1.2: ', JSON.stringify(menuOk, null, 2));
+        console.log('Menu user: ', JSON.stringify(grandFather, null, 2));
     });
 }
-
-// Nota: este código esta en desarrollo y es la mejora que se va a realizar al código anterior.
-// const addChildToParent = (isMenuRoot, pageChild) => {
-//     // debugger;
-//     itemMenu = isMenuRoot ? grandFather : parent;
-
-//     existsProperty = itemMenu[idMenuToSearch].hasOwnProperty('children');
-
-//     if (!existsProperty) itemMenu[idMenuToSearch].children = [];
-
-//     // validar el type para saber si se busca en los siguientes children o no
-//     // validar el type si es 2 agregar si es 1 buscar y si es cero buscar
-//     // console.log('itenMenu: ', itemMenu);
-//     // console.log('pageChild: ', pageChild);
-
-//     itemMenu[idMenuToSearch].children.push(pageChild);
-
-//     if (isMenuRoot) return;
-
-//     idMenuToSearch = itemMenu[idMenuToSearch].parentItemId;
-//     isGrandFather = grandFather[idMenuToSearch] !== undefined;
-//     addChildToParent(isGrandFather, itemMenu);
-// }
-
-// const mapOutMenu = () => {
-//     for (const keyIdMenu in grandFather) {
-//         itemsChildren = Object.values(parent)
-//             .filter(item => item.parentItemId === +keyIdMenu);
-
-//         resourcesChildren = Object.values(page)
-//             .filter(item => item.parentItemId === +keyIdMenu);
-
-//         if (itemsChildren.length === 0) {
-//             grandFather[keyIdMenu].children = resourcesChildren;
-//         } else {
-//             // itemsChildren.push([...resourcesChildren]);
-//             // console.log('items: ', itemsChildren);
-//             // console.log('resource: ', resourcesChildren);
-//             grandFather[keyIdMenu].children = [];
-//             idMenuToSearch = keyIdMenu;
-//             addChildToParent(itemsChildren, resourcesChildren);
-//         }
-//     }
-//     // console.log(itemsChildren);
-//     // console.log(resourcesChildren);
-// }
-
-// const addChildToParent2 = (isMenuRoot, pageChild) => {
-//     if (isMenuRoot) {
-//         existsProperty = grandFather[idMenuToSearch].hasOwnProperty('children');
-
-//         if (!existsProperty) grandFather[idMenuToSearch].children = [];
-//         grandFather[idMenuToSearch].children.push(pageChild);
-//     } else {
-//         existsProperty = parent[idMenuToSearch].hasOwnProperty('children');
-
-//         if (!existsProperty) parent[idMenuToSearch].children = [];
-//         parent[idMenuToSearch].children.push(pageChild);
-
-//         idMenuToSearch = parent[idMenuToSearch].parentItemId;
-//         isGrandFather = grandFather[idMenuToSearch] !== undefined;
-//         addChildToParent2(isGrandFather, parent);
-//     }
-// }
-
-// const addChildToParent = (items, resources) => {
-//     if (items.length === 1) {
-//         const x = Object.values(page)
-//             .filter(item => item.parentItemId === items[0].id);
-//             console.log('children of item: ', x);
-//         items[0].children = x;
-//         grandFather[idMenuToSearch].children.push(...items);
-//         grandFather[idMenuToSearch].children.push(...resources);
-//         return;
-//     }
-
-//     // for (const i of resources) {
-
-//     // }
-//     for (const i of page) {
-//         parent[page[i].parentItemId].children =
-//         parent[page[i].parentItemId].children.push();
-//     }
-// }

@@ -32,7 +32,7 @@ export class Menu {
             const response = await listFetchHttp(apis.menu);
             mapStructureMenu(response);
         } catch (err) {
-            console.log('Err Async Await getMenuUser: ', err.msg);
+            console.log('Err Async Await getMenuUser: ', err);
         }
     }
 

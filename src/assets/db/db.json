@@ -35,7 +35,7 @@
         "id": 5,
         "label": "Page_1",
         "level": 2,
-        "parentItemId": 1,
+        "parentItemId": 10,
         "resource": "route/page"
       },
       {
@@ -82,7 +82,7 @@
         "id": 10,
         "label": "Group_2",
         "level": 1,
-        "parentItemId": 2
+        "parentItemId": 13
       },
       {
         "id": 13,
