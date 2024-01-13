@@ -9,7 +9,6 @@ class Main {
         menu.getAllMenuFetchAsyncAwait();
 
         menu.getMenuUser();
-        // window.matchMedia('(min-width: 720px)').addEventListener('change', () => alert('Heloww i am 720px of width'))
     }
 }
 
