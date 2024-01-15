@@ -1,6 +1,6 @@
 # Proyecto de Aprendizaje Javascript
 
-Este repositorio contiene ejemplos practicos sobre JavaScript,
+Este repositorio contiene ejemplos prácticos sobre JavaScript,
 el cual se divide en 2 ramas `project-AJAX` y `project-DOM`.
 
 ## Ramas
