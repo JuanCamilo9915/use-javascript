@@ -16,11 +16,14 @@ export class Menu {
     getAllMenuFetch() {
         listFetchHttp(apis.menu)
         .then(({ menu }) => console.log('Menu Fetch: ', menu, '\n\n\n'))
-        .catch(({msg}) => console.log(msg));
+        .catch(err => console.log('Error Menu Fetch: ', err, '\n\n\n'));
     }
 
     async getAllMenuFetchAsyncAwait() {
-        const handledError = ({msg}) => console.log('Err Async Await: ', msg);
+        const handledError = (err) => {
+            console.log('Err Async Await: ', err, '\n\n\n');
+            return '';
+        }
         const list = await listFetchHttp(apis.menu).catch(handledError);
 
         if (!list) return;

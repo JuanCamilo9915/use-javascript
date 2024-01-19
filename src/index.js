@@ -1,4 +1,5 @@
 import { Menu } from './core/menu.js';
+import './core/menu.js';
 
 class Main {
     static main() {
@@ -7,7 +8,7 @@ class Main {
         menu.getAllMenu();
         menu.getAllMenuFetch();
         menu.getAllMenuFetchAsyncAwait();
-
+        // Crear librería nativa de javascript
         menu.getMenuUser();
     }
 }

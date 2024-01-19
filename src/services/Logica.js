@@ -31,10 +31,12 @@ function mapMenuOfUser(menu) {
     let resources = [];
     let childrenParent = [];
     let limitLoops = 0;
+    let duplicados = [];
+    let posicionDuplicado = 0;
 
     const filterParentOrPage = (collection, idMenuSearch) => {
         return collection
-        .filter(item => item.parentItemId === idMenuSearch);
+            .filter(item => item.parentItemId === idMenuSearch);
     }
 
     const searchParentOnParentUsingForEach = (selectParent) => {
@@ -48,9 +50,8 @@ function mapMenuOfUser(menu) {
                     parent[menu.id].children.push(item);
                 });
                 // TODO: el carácter opcional(?) es obligatorio, si se quita deja de funcionar.
-                grandFather[menu.parentItemId]?.children.push(parent[menu.id]);            
+                grandFather[menu.parentItemId]?.children.push(parent[menu.id]);       
                 searchParentOnParentUsingForEach(childrenParent);
-                
             } else {
                 selectParent.forEach(item => {
                     // TODO: el carácter opcional(?) es obligatorio, si se quita deja de funcionar.
@@ -64,7 +65,7 @@ function mapMenuOfUser(menu) {
      searchParentOnParentUsingForEach(), como una manera alterna de abordar el ejercicio. */
     const searchParentOnParentUsingFor = (selectParent) => {
         limitLoops = selectParent.length;
-        
+
         for (let i = 0; i < limitLoops; i++) {
             resources = filterParentOrPage(pageArr, selectParent[i].id);
             parent[selectParent[i].id].children = resources;
@@ -76,11 +77,11 @@ function mapMenuOfUser(menu) {
                 });
                 // TODO: el carácter opcional(?) es obligatorio, si se quita deja de funcionar.
                 grandFather[selectParent[i].parentItemId]?.children.push(parent[selectParent[i].id]);
-            
+
                 searchParentOnParentUsingFor(childrenParent);
                 continue;/* TODO: con esto nos ahorramos el uso del bloque else. */
             }
-            
+
             selectParent.forEach(item => {
                 // TODO: el carácter opcional(?) es obligatorio, si se quita deja de funcionar.
                 grandFather[item.parentItemId]?.children.push(item);
@@ -90,7 +91,7 @@ function mapMenuOfUser(menu) {
 
     const mapOutMenu = () => {
         for (const idMenu in grandFather) {
-           resources = filterParentOrPage(pageArr, +idMenu);
+            resources = filterParentOrPage(pageArr, +idMenu);
             grandFather[idMenu].children = resources;
             childrenParent = filterParentOrPage(parentArr, +idMenu);
 
@@ -99,6 +100,24 @@ function mapMenuOfUser(menu) {
              searchParentOnParentUsingFor(childrenParent); */
             // TODO: Using forEach loop declarative
             searchParentOnParentUsingForEach(childrenParent);
+        }
+
+        /* TODO: 
+        Se crea este ciclo for para eliminar los registros dplicados en el menú
+        creado, cabe encionar que estos duplicados pasan en situaciones especiales,
+        NO en todos los casos.
+
+        Adicional se intentarn otras opciones ara evitar tener este ciclo adicional,
+        pero de los intentos realizados ninguno tuvo éxito.
+        */
+        for (const idMenu in grandFather) {
+            grandFather[idMenu].children.forEach(({id}) => {
+                duplicados = grandFather[idMenu].children.filter(item => item.id === id);
+                if (duplicados.length > 1) {
+                    posicionDuplicado = grandFather[idMenu].children.findIndex(item => item.id === id);
+                    grandFather[idMenu].children.splice(posicionDuplicado, 1);
+                }
+            })
         }
     }
 

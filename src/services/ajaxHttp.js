@@ -3,13 +3,14 @@
  * @param { ParamsFetch } api
  * @property ParamsFetch { method, url }
  * @returns fetch
- * @returns throw { msg }
+ * @returns err
  */
 export const listFetchHttp = (api) => {
     const { method, url } = api;
-    const reqApi = new Request(url, { method });
+    const req = { method };
 
-    return fetch(reqApi)
+    return fetch(url, req)
+        .then(res => res)
         .then(res => res.json())
-        .catch(err => { throw { msg: err.message } });
+        .catch(err => {throw {err}});
 };
